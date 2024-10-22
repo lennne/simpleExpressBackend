@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "express": "^4.21.1"
+  },
+  "name": "simpleexpressbackend",
+  "version": "1.0.0",
+  "main": "simplebackend.js",
+  "devDependencies": {},
+  "scripts": {
+    "start":"node simplebackend.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
