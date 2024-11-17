@@ -32,6 +32,14 @@ app.get('/z/',(req,res)=>{
 app.get('/ab*cd',(req,res)=>{
     res.send("abcd");
 })
+class Hello{
+    static why = (wham)=>{
+        console.log(wham);
+        
+    }
+}
+Hello.why()
+
 
 //app.listen is used to bind and listen to the connections on the specified host and PORT
 /*
