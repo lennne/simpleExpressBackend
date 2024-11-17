@@ -1,4 +1,4 @@
-import {getUsers} from './userDAO';
+import {getUsers, getUsersById, removeUsersById, saveUser} from './userDAO';
 
 const getUsers = (done)=>{
     getUsers(done);
@@ -17,5 +17,8 @@ const saveUser = (userData, done) => {
     saveUser(userData,done)
 } 
 
+const updateUser = (userId, userData,done) => {
+    updateUser(userId, userData,done);
+}
 
-module.exports = {getUsers};
+module.exports = {getUsers, getUsersById, saveUser, removeUsersById};
