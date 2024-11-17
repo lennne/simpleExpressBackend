@@ -1,4 +1,4 @@
-import {fs, writeFile} from 'fs';
+const {fs, writeFile} = require('fs');
 const URL = "RequestDemo/User/users.json";
 const getUsers = (done) => {
     fs.readFile(URL,(err,fileContent)=>{
