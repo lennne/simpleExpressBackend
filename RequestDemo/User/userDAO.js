@@ -29,18 +29,23 @@ const getUsersById = (userId, done) => {
 const saveUser = (userData, done) => {
     
     //get user object data
-    fs.readFile(URL, (err,fileContent)=> {
+    fs.readFile(URL,'utf-8', (err,fileContent)=> {
         if(err){
             return done("there was an error");
 
         }
-
         let database = JSON.parse(fileContent);
         //save the data
-        database.push(userData);
-        fs.writeFileFile(URL,database,()=>{
+        let existingData = database.find((myobject => myobject.userId === userData.data.userId))
+        if(existingData){
+            return done("Data already exists!")
+        }
+        database.push(userData.data);
+        database = JSON.stringify(database);
+        
+        fs.writeFile(URL,database,()=>{
             //exeecute done operation
-            return done("Finished");
+            return done(undefined,"Finished");
         })
     })
 
@@ -48,16 +53,18 @@ const saveUser = (userData, done) => {
 }
 
 const removeUsersById = (userId, done) => {
-    fs.readFile(URL,(err,fileContent)=>{
+    fs.readFile(URL,'utf-8',(err,fileContent)=>{
         if(err){
             return done("There was an error removing the files");
         }
         let loadedData = JSON.parse(fileContent);
         let data = loadedData.find(myData => myData.id === userId);
         let index = loadedData.indexOf(data);
-        loadedData = loadedData.splice(index,1);
-        fs.writeFileFile(URL,loadedData, ()=>{
-            return done("it got deleted");
+        loadedData.splice(index,1);
+        loadedData = JSON.stringify(loadedData);
+
+        fs.writeFile(URL,loadedData, ()=>{
+            return done(undefined,"it got deleted");
         })
    
     })
@@ -68,10 +75,11 @@ const removeUsersById = (userId, done) => {
 //over here we have one or more values that have changed and we're simply
 //specifying which of the data in the database or server we want to update
 const updateUser = (userId, userData, done) => {
-    fs.readFile(URL, (err, fileContent)=>{
+    fs.readFile(URL,'utf-8', (err, fileContent)=>{
         if(err){
             return done("There was an error updating user");
         }
+       console.log(userData);
         //parse the json text
         let loadedData = JSON.parse(fileContent);
         //find the object data using the array
@@ -80,12 +88,16 @@ const updateUser = (userId, userData, done) => {
         let index = loadedData.indexOf(user);
         let newUser = {
             ...loadedData[index],
-            userData
+            ...userData
         }
+        console.log(newUser);
+     
         loadedData[index] = newUser;
+
+        loadedData = JSON.stringify(loadedData);
         
-        fs.writeFileFile(URL, loadedData, ()=>{
-            return done("Finished updating");
+        fs.writeFile(URL, loadedData, ()=>{
+            return done(null,"Finished updating");
         });
         
     })

@@ -15,8 +15,8 @@ const removeUsersByIdController = (userId, done) => {
     return removeUsersById(userId, done);
 }
 
-const updateUserController = (userId, done) => {
-    return updateUser(userId,done);
+const updateUserController = (userId,userData, done) => {
+    return updateUser(userId,userData,done);
 }
 
 module.exports = {getUsersController, getUsersByIdController, saveUserController, removeUsersByIdController, updateUserController}

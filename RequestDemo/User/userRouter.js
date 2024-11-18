@@ -45,15 +45,16 @@ try{
         return res.status(200).send({status:"OK",data:results});
     })
 }catch(err){
-    return res.status(500).send("Try again Later");
+    return res.status(409).send("Duplicate Entry");
 }
     
 });
 
 routes.put("/:userId",(req,res)=>{
-    let userId = req.params.userId;
+    let userId = parseInt(req.params.userId);
+    let userData = req.body.data;
     try{
-        userController.updateUserController(userId,(err,results)=>{
+        userController.updateUserController(userId,userData,(err,results)=>{
             if(err){
                 return res.status(400).send("There was an error in updating the resource")
             }
@@ -65,7 +66,7 @@ routes.put("/:userId",(req,res)=>{
 });
 
 routes.delete("/:userId",(req,res)=>{
-    let userId = req.params;
+    let userId = parseInt(req.params);
     try{
         userController.removeUsersByIdController(userId,(err,results)=>{
             if(err){

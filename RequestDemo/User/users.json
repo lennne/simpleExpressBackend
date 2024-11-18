@@ -1,38 +1,38 @@
 [
     {
-        "username": "john", 
-        "userId":101
+        "username": "john",
+        "userId": 101
     },
     {
-        "username": "Bob", 
-        "userId":102
+        "username": "Bob",
+        "userId": 102
     },
     {
         "username": "William",
-         "userId":103
+        "userId": 103
     },
     {
         "username": "Carrousel",
-         "userId":104
+        "userId": 104
     },
     {
-        "username": "michael", 
-        "userId":105
+        "username": "michael",
+        "userId": 105
     },
     {
         "username": "Nathan",
-        "userId":106
+        "userId": 106
     },
     {
-        "username": "Mike", 
-        "userId":107
+        "username": "Mike",
+        "userId": 107
     },
     {
         "username": "George",
-        "userId":108
+        "userId": 108
     },
     {
-        "username": "Samuel", 
-        "userId":109
+        "username": "Samuel",
+        "userId": 109
     }
 ]
