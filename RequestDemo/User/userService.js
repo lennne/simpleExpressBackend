@@ -1,7 +1,7 @@
 const userDAO = require('./userDAO');
 
-const getUsers = (done)=>{
-   userDAO.getUsers(done);
+const getUsers = (err, done)=>{
+   userDAO.getUsers(err, done);
 }
 
 const getUsersById = (userId,done) => {

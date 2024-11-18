@@ -1,26 +1,28 @@
-const {fs, writeFile} = require('fs');
-const URL = "RequestDemo/User/users.json";
+const fs = require('fs');
+const URL = "./RequestDemo/User/users.json";
 const getUsers = (done) => {
-    fs.readFile(URL,(err,fileContent)=>{
+    
+    fs.readFile(URL,'utf-8',(err,fileContent)=>{
         //return user data
         if(err){
-            return done("there was an error loading the json")
+            return done(err,null)
         }
         let loadedData = JSON.parse(fileContent);
-        return done(loadedData);
+        return done(null,loadedData);
     });
-
-    return done( undefined )
+    
 }
 
 const getUsersById = (userId, done) => {
-    fs.readFile(URL, (err, fileContent)=>{
+    fs.readFile(URL,'utf-8', (err, fileContent)=>{
         if(err){
             return done("There was an error while getting user");
         }
+        console.log(typeof(userId));
         let loadedData = JSON.parse(fileContent);
-        let user = loadedData.find((myObject) => myObject.id === userId);
-        return done(user);
+        let user = loadedData.find((myObject) => myObject.userId === userId);
+        console.log(user);
+        return done(undefined,user);
     })
 }
 
@@ -36,7 +38,7 @@ const saveUser = (userData, done) => {
         let database = JSON.parse(fileContent);
         //save the data
         database.push(userData);
-        writeFile(URL,database,()=>{
+        fs.writeFileFile(URL,database,()=>{
             //exeecute done operation
             return done("Finished");
         })
@@ -54,7 +56,7 @@ const removeUsersById = (userId, done) => {
         let data = loadedData.find(myData => myData.id === userId);
         let index = loadedData.indexOf(data);
         loadedData = loadedData.splice(index,1);
-        writeFile(URL,loadedData, ()=>{
+        fs.writeFileFile(URL,loadedData, ()=>{
             return done("it got deleted");
         })
    
@@ -82,7 +84,7 @@ const updateUser = (userId, userData, done) => {
         }
         loadedData[index] = newUser;
         
-        writeFile(URL, loadedData, ()=>{
+        fs.writeFileFile(URL, loadedData, ()=>{
             return done("Finished updating");
         });
         

@@ -6,21 +6,24 @@ routes.get("/",(req,res)=>{
     try{
         userController.getUsersController((err,results)=>{
             //the error here is passed so we can handle some unique or specific error
+            
             if(err){
+                console.log(err);
                 return res.status(400).send(err);
             }
             return res.status(200).send({status:"OK",data:results});
         });
     }//the catch here is to make sure that when accessing the data, since it is an async call which tries to read a file it can exit in an unsafe manner so in order to handle that we use the catch block
     catch(err){
-        return res.status(500).send("Try after sometime");
+        console.log("error is ", err);
+        return res.status(500).send("Try after sometime hmm");
     }
 });
 
 routes.get("/:userId", (req,res)=>{
     try{
         //here we get the route parameter from the URL and to access it we use req.params
-        let userId = req.params.userId;
+        let userId = parseInt(req.params.userId);
         userController.getUsersByIdController(userId,(err,results)=>{
             if(err){
                 return res.status(400).send(err);

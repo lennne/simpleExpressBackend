@@ -1,4 +1,5 @@
 const express = require('express');
+const fs = require('fs');
 const app = express();
 const config = require('./config');
 const userRouter = require('./RequestDemo/User/userRouter');
@@ -21,4 +22,4 @@ app.use((req,res,next)=>{
 
 app.listen(config.PORT,()=>{
     console.log("Listening on PORT ", config.PORT);
-});
+})
