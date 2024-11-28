@@ -8,6 +8,9 @@ const getUsersById = (userId,done) => {
     userDAO.getUsersById(userId,done);
 }
 
+const findUser = (email, done) => {
+    userDAO.findUser(email, done);
+}
 
 const removeUsersById = (userId,done) => {
     userDAO.removeUsersById(userId,done);
@@ -21,4 +24,4 @@ const updateUser = (userId, userData,done) => {
     userDAO.updateUser(userId, userData,done);
 }
 
-module.exports = {getUsers, getUsersById, updateUser, saveUser, removeUsersById};
+module.exports = {getUsers, getUsersById, findUser, updateUser, saveUser, removeUsersById};

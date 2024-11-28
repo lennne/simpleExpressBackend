@@ -1,5 +1,15 @@
 const fs = require('fs');
 const URL = "./RequestDemo/User/users.json";
+
+const findUser = (email, done) => {
+    fs.readFile(URL,'utf-8',  (err,fileContent)=>{
+        const allUsers = JSON.parse(fileContent);
+        const foundUser = allUsers.filter((user) => user.email === email)[0];
+        console.log(foundUser)
+        return done(undefined, foundUser);
+    });
+}
+
 const getUsers = (done) => {
     
     fs.readFile(URL,'utf-8',(err,fileContent)=>{
@@ -19,7 +29,7 @@ const getUsersById = (userId, done) => {
             return done("There was an error while getting user");
         }
         console.log(typeof(userId));
-        let loadedData = JSON.parse(fileContent);
+        let loadedData = JSON.parse(fileContent);   
         let user = loadedData.find((myObject) => myObject.userId === userId);
         console.log(user);
         return done(undefined,user);
@@ -36,7 +46,7 @@ const saveUser = (userData, done) => {
         }
         let database = JSON.parse(fileContent);
         //save the data
-        let existingData = database.find((myobject => myobject.userId === userData.data.userId))
+        let existingData = database.find((myobject => myobject.userId === userData.userId))
         if(existingData){
             return done("Data already exists!")
         }
@@ -44,9 +54,9 @@ const saveUser = (userData, done) => {
         database = JSON.stringify(database);
         
         fs.writeFile(URL,database,()=>{
-            //exeecute done operation
+            //execute done operation
             return done(undefined,"Finished");
-        })
+        });
     })
 
 
@@ -103,4 +113,4 @@ const updateUser = (userId, userData, done) => {
     })
 }
 
-module.exports = {getUsers, getUsersById, saveUser, updateUser, removeUsersById};
+module.exports = {getUsers, getUsersById, saveUser, updateUser, findUser, removeUsersById};
