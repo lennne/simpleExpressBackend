@@ -13,6 +13,7 @@ morgan.token('time',()=> dateFormat.asString(dateFormat.ISO8601_FORMAT, new Date
 app.use(morgan('[:time] :remote-addr :method :url :status :res[content-length] :response-time ms'));
 
 app.use('/auth', authRouter);
+app.use('/api/v1/users', userRouter);
 
 // app.use('/api/v1/users',userRouter);
 

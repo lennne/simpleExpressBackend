@@ -1,6 +1,6 @@
 const config = {
     PORT : process.env.PORT || "3000",
-    AUTH_Secret : process.env.AUTH_Secret || "secret"
+    AUTH_SECRET : process.env.AUTH_SECRET || "secret"
 }
 
 module.exports = config;

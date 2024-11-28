@@ -50,7 +50,7 @@ const saveUser = (userData, done) => {
         if(existingData){
             return done("Data already exists!")
         }
-        database.push(userData.data);
+        database.push(userData);
         database = JSON.stringify(database);
         
         fs.writeFile(URL,database,()=>{

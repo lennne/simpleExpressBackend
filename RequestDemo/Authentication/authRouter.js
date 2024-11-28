@@ -36,7 +36,7 @@ routes.post('/login',(req,res)=>{
             if(err){
                 res.status(400).send("Invalid Credentials");
             }else{
-                res.status(200).send(Results);
+                res.status(200).send(results);
             }
 
         })
