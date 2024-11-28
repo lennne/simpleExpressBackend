@@ -17,6 +17,23 @@ const registerUser = (userData, done) => {
     })
 }
 
+const loginUser = ({email,password}, done) => {
+    userService.findUser(email, (err,userFound)=>{ //callback function which accepts an error value and whether a user was found
+        if(err){
+            return done(err);
+        }else{
+            const verifiedUser = authService.verifyUser({email,password},userFound);
+            if(verifiedUser){
+                const jwtToken = authService.createJWT(userFound);
+                done(undefined, jwtToken);
+            }else{
+                done({error:"User not verified!"})
+            }
+        }
+    })
+}
+
 module.exports = {
-    registerUser
+    registerUser,
+    loginUser
 }

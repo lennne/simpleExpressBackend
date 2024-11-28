@@ -26,4 +26,25 @@ routes.post('/register',(req,res)=>{
     }
 })
 
+routes.post('/login',(req,res)=>{
+    try{
+        const {email, password} = req.body;
+        if(!(email,password)){
+             res.status(400).send({error:"Required Inputs are missing", err})
+        }
+        authController.loginUser({email,password},(err,results)=>{
+            if(err){
+                res.status(400).send("Invalid Credentials");
+            }else{
+                res.status(200).send(Results);
+            }
+
+        })
+    }
+    catch(err){ 
+        res.status(500).send({error:"There was an error while registering the user", err});
+
+    }
+})
+
 module.exports = routes;
